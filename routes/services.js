@@ -12,6 +12,8 @@ router.get('/transactions', servicesController.getTransactions);
 // add transaction manually
 router.post('/add-trans', servicesController.postAddTransaction);
 
+router.get('/test', servicesController.getTest);
+
 //paystack webhook
 router.post('/payment-verification', servicesController.postPayStackWebHook);
 //get verify payment page

@@ -102,8 +102,16 @@ exports.postPayStackWebHook = (req, res) => {
   }
   res.send(200);
 };
+
+exports.getTest = (req, res, next) => {
+  res.render('test', {
+    pageTitle: 'test',
+    path: '/admin-dashboard',
+  });
+};
+
 // add transaction manually
-exports.postAddTransaction = (res, req) => {
+exports.postAddTransaction = (req, res) => {
   const email = req.body.email;
   const fullName = req.body.full_name;
   const amount = req.body.amount;
