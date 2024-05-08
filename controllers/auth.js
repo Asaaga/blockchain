@@ -5,25 +5,33 @@ exports.postSignIn = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  console.log(password)
-  console.log(email)
+  console.log(password);
+  console.log(email);
 
   Member.findOne({ email }).then((member) => {
     if (!member) {
       req.flash('error', 'invalid email or password');
       return res.redirect('/');
     }
-    return bcrypt.compare(password, member.password)
+
+    return bcrypt
+      .compare(password, member.password)
       .then((match) => {
         if (match) {
           req.session.isLoggedIn = true;
           req.session.member = member;
           return req.session.save((err) => {
             console.log(err);
-            res.redirect('/dashboard');
+            if (member.email === 'admin@gmail.com') {
+              return res.redirect('/admin-dashboard');
+            } else {
+              res.redirect('/dashboard');
+            }
           });
         }
+
         res.redirect('/');
+
         req.flash('error', 'invalid email or password');
       })
       .catch((error) => {

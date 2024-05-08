@@ -9,32 +9,65 @@
   <div class="row tm-content-row">
     <div class="col-12 tm-block-col">
       <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-        <h2 class="tm-block-title">Registered Users</h2>
+        <div class="d-flex justify-content-between">
+          <h2 class="tm-block-title">Registered Users</h2>
+          <ul class="d-flex">
+            <li
+              class="mr-5"
+              style="list-style: none">
+              <a href="/admin-dashboard">Users</a>
+            </li>
+            <li style="list-style: none">
+              <a href="/transactions">Transactions</a>
+            </li>
+          </ul>
+        </div>
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Time Stamp</th>
-              <th scope="col">Previous Hash</th>
-              <th scope="col">Hash</th>
-              <th scope="col">Amount</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">EMail</th>
+              <th scope="col">Next of Kin</th>
+              <th scope="col">Occupation</th>
+              <th scope="col">Address</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+          <tbody>
+            <% if(members.length > 0 ) { %> <% members.forEach(member => { %>
 
-      <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-        <h2 class="tm-block-title">All Transactions</h2>
-        <table class="table">
-          <thead>
             <tr>
-              <th scope="col">Time Stamp</th>
-              <th scope="col">Previous Hash</th>
-              <th scope="col">Hash</th>
-              <th scope="col">Amount</th>
+              <td>
+                <%= member.firstName %> <%= member.middleName %> <%=
+                member.secondName %>
+              </td>
+              <td><%= member.email %></td>
+              <td><%= member.nextOfKin %>00</td>
+
+              <td><%= member.occupation %></td>
+              <td><%= member.address %></td>
+
+              <td>
+                <form
+                  action="/delete"
+                  method="post">
+                  <input
+                    type="hidden"
+                    value="<%= member._id %>"
+                    name="memberId" />
+                  <button
+                    type="submit"
+                    class="btn-danger">
+                    Delete
+                  </button>
+                </form>
+              </td>
             </tr>
-          </thead>
-          <tbody></tbody>
+
+            <% }) %> <% } else { %>
+            <h3>No Registered member for Now</h3>
+            <% } %>
+          </tbody>
         </table>
       </div>
     </div>

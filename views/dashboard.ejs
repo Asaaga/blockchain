@@ -132,3 +132,20 @@
   }
 </script>
 <%- include('includes/footer.ejs') %>
+<form
+  action="/add-trans"
+  method="post">
+  <input
+    type="email"
+    name="email"
+    placeholder="enter email" />
+  <input
+    type="text"
+    name="full_name"
+    placeholder="enter full name" />
+  <input
+    type="number"
+    name="amount"
+    placeholder="enter amount" />
+  <button type="submit">pay</button>
+</form>
